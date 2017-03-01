@@ -33,7 +33,7 @@ public class Board {
 	}
 	
 	public boolean checkA(int row, int column){
-		if(board[row][column].equals("_")) return true;
+		if(board[row-1][column-1].equals("_")) return true;
 		return false;
 	}
 
@@ -52,13 +52,17 @@ public class Board {
 		System.out.println();
 	}
 
-	public boolean checkWin(Player player, Board board) {
-		System.out.println("Checking ....");
+	public boolean checkWin(Player player) {
+		System.out.println("Checking winner.....");
 		if (checkRow(player)) {
 			return true;
 		} else if (checkColumn(player)) {
 			return true;
 		} else if (checkDiagonal(player)) {
+			return true;
+		} else if (checkDiagonal2(player)){
+			return true;
+		} else if (checkDiagonal3(player)){
 			return true;
 		}
 		return false;
@@ -77,7 +81,11 @@ public class Board {
 					count = 0;
 			}
 		}
-
+		return false;
+	}
+	
+	public boolean checkDiagonal2(Player player){
+		int count = 0;
 		for (int i = 0; i < 5; i++) {
 			for (int j = 0; i + j < 9; j++) {
 				if (board[j][i + j].equals(player.getSymValue())) {
@@ -89,9 +97,38 @@ public class Board {
 					count = 0;
 			}
 		}
-
 		return false;
 	}
+	
+	public boolean checkDiagonal3(Player player){
+		int count = 0;
+		for(int i=4 ; i<size ; i++){
+			for(int j=0 ; j<i ; j++){
+				if(board[i-j][j].equals(player.getSymValue())){
+					count++;
+				}
+				
+				if(count == 5){
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+	
+	public boolean checkDiagonal4(Player player){
+		int count = 0;
+		for(int i = 4 ; i<size ; i++){
+			for(int j = 0 ; j<=i ; j++){
+				if(board[size-(i-j)-1][size-j-1].equals(player.getSymValue())){
+					count++;
+				}else count = 0;
+				if(count == 5) return true;
+			}
+		}
+		return false;
+	}
+	
 
 	public boolean checkRow(Player player) {
 		int count = 0;
