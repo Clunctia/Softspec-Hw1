@@ -18,7 +18,8 @@ public class Game {
 		Board board = new Board();
 		player1 = new Player("Player 1", "X");
 		player2 = new Player("Player 2", "O");
-
+		System.out.println("Welcome to the game.");
+		System.out.println("Plese enter only positive number.");
 		while (!win) {
 			board.printBoard();
 			while (!placed) {
